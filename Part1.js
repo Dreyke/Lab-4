@@ -211,4 +211,50 @@ var nobel_prize_winners_2017 = {
 // TODO write code to print the total number of prize categories
 // TODO write code to count the total number of laureates from 2017. (have a good look at how the JSON is structured, and think about what loop(s) you'll need to write.)
 
+// Would a loop work better to print the full name?
+// This took some time because after I was putting the element place, like laureates[1], rather than [0].key
+var firstName = nobel_prize_winners_2017.prizes[3].laureates[0].firstname;
+var lastName = nobel_prize_winners_2017.prizes[3].laureates[0].surname;
+console.log(firstName + " " + lastName);
 
+// prints id of each Physics Nobel laureates
+// I can't figure out how to make this work without adding laureate
+ids = [];
+for (var id_component in nobel_prize_winners_2017.prizes[0].laureates) {
+    id = nobel_prize_winners_2017.prizes[0].laureates[id_component]['id'];
+
+    ids.push(id);
+}
+console.log(ids);
+
+//prints total number of prize categories
+categories = [];
+for (var category_list in nobel_prize_winners_2017.prizes) {
+    category = nobel_prize_winners_2017.prizes[category_list].category;
+
+    categories.push(category);
+}
+console.log("Total count of prize categories is " + categories.length);
+
+
+// prints list of all prize categories
+// Using a different way than a for-in loop
+// this is a mix of code between https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys
+// and https://stackoverflow.com/questions/40530752/how-to-access-nested-json-object-key-and-values
+Object.keys(nobel_prize_winners_2017["prizes"]).forEach(function (key) {
+    console.log(nobel_prize_winners_2017["prizes"][key].category);
+});
+
+// Displays number of prize categories
+console.log(Object.keys(nobel_prize_winners_2017["prizes"]).length);
+
+// loop to count the number of laureates
+var count = 0;
+
+for (prizes in nobel_prize_winners_2017) {
+    for (laureates in prizes) {
+        count++;
+    }
+}
+
+console.log(count);
